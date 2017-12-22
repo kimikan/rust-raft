@@ -1,60 +1,13 @@
 
+mod config;
+mod node;
+mod define;
+
 use std::time::SystemTime;
 use std::sync::{Arc, RwLock};
 use std::sync::atomic::{AtomicPtr, Ordering};
 
 use std::collections::HashMap;
-
-struct Configuration {
-    _nodes: Vec<String>,
-}
-
-impl Configuration {
-    fn new() -> Configuration {
-        Configuration { _nodes: vec![] }
-    }
-
-    fn get_nodes(&self) -> &Vec<String> {
-        &self._nodes
-    }
-}
-
-
-struct Node {
-    /* which means unique string */
-    _name: AtomicPtr<String>,
-
-    /* format(ipv4:port) */
-    _address: AtomicPtr<String>,
-    //prevLogIndex      uint64
-    _last_update_time: AtomicPtr<SystemTime>,
-}
-
-impl Node {
-
-    fn new() -> Node {
-        let name = AtomicPtr::new(&mut "".to_owned());
-        let addr = AtomicPtr::new(&mut "".to_owned());
-        let time = AtomicPtr::new(&mut SystemTime::now());
-
-        Node {
-            _name: name,
-            _address: addr,
-            _last_update_time: time,
-        }
-    }
-}
-
-enum Role {
-    /*only 1 master in a cluster */
-    Master,
-
-    /* temp state for lead vote */
-    Candidate,
-    /* a more general role */
-    Follower,
-    Empty,
-}
 
 struct Message {
     _id:u32,
