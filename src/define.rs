@@ -1,6 +1,6 @@
 
 
-enum Role {
+pub enum Role {
     /*only 1 master in a cluster */
     Master,
 

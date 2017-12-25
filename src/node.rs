@@ -1,5 +1,10 @@
 
-struct Node {
+
+use std::time::SystemTime;
+use std::sync::atomic::{AtomicPtr, Ordering};
+
+
+pub struct Node {
     /* which means unique string */
     _name: AtomicPtr<String>,
 
@@ -11,7 +16,7 @@ struct Node {
 
 impl Node {
 
-    fn new() -> Node {
+    pub fn new() -> Node {
         let name = AtomicPtr::new(&mut "".to_owned());
         let addr = AtomicPtr::new(&mut "".to_owned());
         let time = AtomicPtr::new(&mut SystemTime::now());

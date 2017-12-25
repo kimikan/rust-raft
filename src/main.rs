@@ -14,9 +14,9 @@ struct Message {
 }
 
 struct Server {
-    _peers: RwLock<HashMap<String, Arc<Node>>>,
-    _node: Node,
-    _role: Role,
+    _peers: RwLock<HashMap<String, Arc<node::Node>>>,
+    _node: node::Node,
+    _role: define::Role,
 
     //offset in peers
     _voted_for: String,
@@ -32,10 +32,10 @@ struct Server {
 impl Server {
     fn new() -> Server {
         Server {
-            _peers: HashMap::new(),
-            _node: Node::new(),
-            _role: Role::Empty,
-            _voted_for: 0,
+            _peers: Default::default(),
+            _node: node::Node::new(),
+            _role: define::Role::Empty,
+            _voted_for: Default::default(),
             _term: 0,
             _commit_index: 0,
             _next_index: 0,
@@ -45,14 +45,14 @@ impl Server {
 
     fn event_loop(&self, msg:&Message) {
         match self._role {
-            Role::Empty => {}
-            Role::Candidate => {
+            define::Role::Empty => {}
+            define::Role::Candidate => {
                 self.candidate_event_loop(msg);
             },
-            Role::Master => {
+            define::Role::Master => {
                 self.master_event_loop(msg);
             },
-            Role::Follower => {
+            define::Role::Follower => {
                 self.follower_event_loop(msg);
             },
         }
