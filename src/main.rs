@@ -9,10 +9,6 @@ use std::sync::atomic::{AtomicPtr, Ordering};
 
 use std::collections::HashMap;
 
-struct Message {
-    _id:u32,
-}
-
 struct Server {
     _peers: RwLock<HashMap<String, Arc<node::Node>>>,
     _node: node::Node,
@@ -43,7 +39,7 @@ impl Server {
         }
     }
 
-    fn event_loop(&self, msg:&Message) {
+    fn event_loop(&self, msg:&define::Message) {
         match self._role {
             define::Role::Empty => {}
             define::Role::Candidate => {
@@ -58,14 +54,16 @@ impl Server {
         }
     }
 
-    fn candidate_event_loop(&self, msg:&Message) {}
+    fn candidate_event_loop(&self, msg:&define::Message) {}
 
-    fn master_event_loop(&self, msg:&Message) {}
+    fn master_event_loop(&self, msg:&define::Message) {}
 
-    fn follower_event_loop(&self, msg:&Message) {}
+    fn follower_event_loop(&self, msg:&define::Message) {}
 }
 
 impl Server {}
 
 
-fn main() {}
+fn main() {
+    
+}
