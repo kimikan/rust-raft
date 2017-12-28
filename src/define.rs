@@ -17,7 +17,7 @@
 //  after combine two partitions into one, 
 // if one lead received higher term then self, it becomes follower. downgrade
 
-
+//error handling
 
 pub enum Role {
     /*only 1 master in a cluster */
