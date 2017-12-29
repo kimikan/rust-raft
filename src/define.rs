@@ -20,6 +20,8 @@
 //error handling
 
 pub enum Role {
+    None,
+    
     /*only 1 master in a cluster */
     Master,
 
@@ -27,7 +29,6 @@ pub enum Role {
     Candidate,
     /* a more general role */
     Follower,
-    Empty,
 }
 
 
